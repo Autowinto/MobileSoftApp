@@ -1,22 +1,33 @@
-import { View, Text, StyleSheet, Button, ImageBackground, Dimensions, Image, Pressable } from "react-native"
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ImageBackground,
+  Dimensions,
+  Image,
+  Pressable,
+} from "react-native"
+import { NavigationProp, ParamListBase } from "@react-navigation/native"
 type Props = {
-  navigation: NavigationProp<ParamListBase>;
-};
+  navigation: NavigationProp<ParamListBase>
+}
 
 export default function Login({ navigation }: Props) {
-
   const onPress = () => {
-    navigation.navigate('Details')
+    navigation.navigate("Details")
   }
 
   return (
-
     <View style={styles.container}>
       <ImageBackground
-        source={require('../assets/login-bg.png')}
-        style={styles.background}></ImageBackground>
-      <ImageBackground source={require('../assets/autorent-logo.png')} style={styles.icon}></ImageBackground>
+        source={require("../assets/login-bg.png")}
+        style={styles.background}
+      ></ImageBackground>
+      <ImageBackground
+        source={require("../assets/autorent-logo.png")}
+        style={styles.icon}
+      ></ImageBackground>
       <Text style={styles.title}>Autorent</Text>
       <View style={styles.desc}>
         <Text style={styles.descLabel}>... din foretrukne</Text>
@@ -26,23 +37,25 @@ export default function Login({ navigation }: Props) {
 
       <Pressable style={styles.appleButton} onPress={onPress}>
         <View style={{ width: 20 }}>
-          <ImageBackground style={styles.buttonIcon} source={require('../assets/apple.png')}></ImageBackground>
+          <ImageBackground
+            style={styles.buttonIcon}
+            source={require("../assets/apple.png")}
+          ></ImageBackground>
         </View>
         <View style={{ width: 200 }}>
-          <Text style={styles.buttonLabel}>
-            Opret en bruger med Apple
-          </Text>
+          <Text style={styles.buttonLabel}>Opret en bruger med Apple</Text>
         </View>
       </Pressable>
 
       <Pressable style={styles.otherButton} onPress={onPress}>
         <View style={{ width: 20 }}>
-          <ImageBackground style={styles.buttonIcon} source={require('../assets/keyhole.png')}></ImageBackground>
+          <ImageBackground
+            style={styles.buttonIcon}
+            source={require("../assets/keyhole.png")}
+          ></ImageBackground>
         </View>
         <View style={{ width: 200 }}>
-          <Text style={styles.buttonLabel}>
-            Andre oprettelses muligheder
-          </Text>
+          <Text style={styles.buttonLabel}>Andre oprettelses muligheder</Text>
         </View>
       </Pressable>
 
@@ -53,7 +66,6 @@ export default function Login({ navigation }: Props) {
         </Pressable>
       </View>
     </View>
-
   )
 }
 
@@ -128,8 +140,5 @@ const styles = StyleSheet.create({
     bottom: 40,
     gap: 10,
     flexDirection: "row",
-  }
-
-
-
+  },
 })
