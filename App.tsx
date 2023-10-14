@@ -10,9 +10,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login}></Stack.Screen>
-        <Stack.Screen name="CarList" component={CarList}></Stack.Screen>
-        <Stack.Screen name="Details" component={Details}></Stack.Screen>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="CarList"
+          component={CarList}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )
