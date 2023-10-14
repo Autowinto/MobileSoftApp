@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, Button } from "react-native"
+import { View, Text, StyleSheet, Button, Pressable } from "react-native"
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
 
 export default function Login({ navigation }) {
   return (
@@ -6,14 +7,15 @@ export default function Login({ navigation }) {
       <Text>Autorent</Text>
       <Text>... din foretrukne biludlejningsekspert</Text>
       <Text>Login Page</Text>
-      <Button
-        title="Opret en bruger med Apple"
+      <Pressable
+        style={styles.button}
         onPress={() => navigation.navigate("Details")}
-      />
-      <Button
-        title="Andre oprettelsesmuligheder"
-        onPress={() => navigation.navigate("Details")}
-      />
+      >
+        <Text>Opret en bruger med Apple</Text>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Details")}>
+        <Text>Se andre oprettelsesmuligheder</Text>
+      </Pressable>
 
       <Text>Har du allerede en bruger?</Text>
       <a>Login her</a>
@@ -27,5 +29,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    backgroundColor: "purple",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
   },
 })
