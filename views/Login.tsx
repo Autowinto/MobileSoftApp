@@ -42,7 +42,7 @@ export default function Login({ navigation }: Props) {
         </View>
         <View style={{ width: 200 }}>
           <Text style={styles.buttonLabel}>Sign up with Apple ID</Text>
-        </View>1
+        </View>
       </Pressable>
 
       <Pressable style={styles.otherButton} onPress={onPress}>
