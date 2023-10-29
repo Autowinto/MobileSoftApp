@@ -11,7 +11,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="CarList">
           <Stack.Screen
             name="Login"
             component={Login}

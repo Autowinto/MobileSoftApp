@@ -4,9 +4,16 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
-  Button,
+  Image,
+  ImageBackground,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import Navbar from "./Navbar"
+import styles from "../styles"
+
+type CarListItemProps = {
+  path: string
+}
 
 const CarListItem = () => {
   const navigation = useNavigation()
@@ -15,7 +22,7 @@ const CarListItem = () => {
       style={styles.carItem}
       onPress={() => navigation.navigate("Details")}
     >
-      <Text>Car</Text>
+      <Image source={require('../assets/flatlist/car-front.jpg')}></Image>
     </Pressable>
   )
 }
@@ -38,26 +45,37 @@ const CarListView = () => {
 
 export default function CarList() {
   return (
-    <View style={styles.container}>
-      <Text style={{ alignSelf: "center" }}>CarList Page</Text>
-      <Button title="Søg efter biler"></Button>
+    <View style={clStyles.container}>
+      <ImageBackground
+        source={require("../assets/login-bg.png")}
+        style={styles.background}
+      ></ImageBackground>
+      <Navbar />
+      <Text>
+        <Text style={{ fontSize: 32, fontWeight: "bold", color: "#865AFF" }}>
+          Autorent
+        </Text>
+        <Text style={styles.descLabel}>, Your</Text>
+      </Text>
+      <Text style={{ ...styles.descLabel, textAlign: "left" }}>
+        preferred car
+      </Text>
+      <Text style={{ ...styles.descLabel, textAlign: "left" }}>
+        rental expert
+      </Text>
+      <Pressable style={styles.searchButton}>
+        <Text style={styles.buttonLabel}>Search for cars</Text>
+      </Pressable>
       <CarListView></CarListView>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const clStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#543",
     // alignItems: "center",
     justifyContent: "center",
-  },
-  carItem: {
-    width: 150,
-    marginEnd: 10,
-    height: 150,
-    borderRadius: 10,
-    backgroundColor: "gray",
   },
 })
