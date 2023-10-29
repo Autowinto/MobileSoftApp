@@ -2,16 +2,19 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native"
 import { useState } from "react"
 import { View, StyleSheet, ImageBackground, Text } from "react-native"
 
-export default function Dots( {index}: any) {
+type Props = {
+    index: number,
+    amountOfDots: number,
+}
+
+export default function Dots( {index, amountOfDots}: Props) {
 
     return (
         <View style={styles.container}>
             <View style={styles.dotsContainer}>
-                <View style={[styles.circle, index === 0 ? { backgroundColor: '#865AFF'} : null]}></View>
-                <View style={[styles.circle, index === 1 ? { backgroundColor: '#865AFF'} : null]}></View>
-                <View style={[styles.circle, index === 2 ? { backgroundColor: '#865AFF'} : null]}></View>
-                <View style={[styles.circle, index === 3 ? { backgroundColor: '#865AFF'} : null]}></View>
-                <View style={[styles.circle, index === 4 ? { backgroundColor: '#865AFF'} : null]}></View>
+                {Array.from(Array(amountOfDots).keys()).map((_, i) => (
+                    <View key={i} style={[styles.circle, {backgroundColor: i === index ? "#865AFF": "#1E1E1E"}]}></View>
+                ))}
             </View>
         </View>
     )

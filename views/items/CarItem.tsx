@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 350,
     height: 180,
-    transform: [{ scale: 0.8 }]
+    transform: [{ scale: 1 }]
   },
 })

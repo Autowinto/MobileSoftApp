@@ -1,26 +1,50 @@
-export const CarSlides = [
-    {
-        id:  '1',
-        title: 'Slide 1',
-        description: 'Front',
-        image: require('./assets/flatlist/car-front.png'),
+export const CarSlides = {
+    'Mercedes_G':  {
+        name: 'Mercedes_G',
+        price: 200,
+        currency: '$',
+        location: 'New York',
+        time_to_100: '5.5',
+        top_speed: '250',
+        vehicle_type: 'four-wheel drive',
+        items: [
+            {
+                id: '1',
+                title: 'Slide 1',
+                description: 'Front',
+                image: require('./assets/flatlist/car-front.png'),
+            },
+            {
+                id: '2',
+                title: 'Slide 2',
+                description: 'Back',
+                image: require('./assets/flatlist/car-back.png'),
+            },
+        ],
     },
-    {
-        id:  '2',
-        title: 'Slide 2',
-        description: 'Back',
-        image: require('./assets/flatlist/car-back.png'),
-    },
-    // {
-    //     id:  '3',
-    //     title: 'Slide 3',
-    //     description: 'Left',
-    //     image: require('./assets/flatlist/car-left.png'),
-    // },
-    // {
-    //     id:  '4',
-    //     title: 'Slide 4',
-    //     description: 'Right',
-    //     image: require('./assets/flatlist/car-right.png'),
-    // }
-]
+    'Mercedes_S':  {
+        name: 'Mercedes_S',
+        price: 300,
+        currency: 'EUR',
+        location: 'New York',
+        time_to_100: '5.5',
+        top_speed: '250',
+        vehicle_type: 'four-wheel drive',
+        items: [
+            {
+                id: '1',
+                title: 'Slide 1',
+                description: 'Front',
+                image: require('./assets/flatlist/car-front.png'),
+            },
+            {
+                id: '2',
+                title: 'Slide 2',
+                description: 'Back',
+                image: require('./assets/flatlist/car-back.png'),
+            },
+        ],
+    }
+    
+}
+

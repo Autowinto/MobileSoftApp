@@ -6,14 +6,21 @@ import {
   Pressable,
   Button,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native"
 
-const CarListItem = () => {
-  const navigation = useNavigation()
+type Props = {
+  carDetails: any
+  navigation?: NavigationProp<ParamListBase>
+}
+
+const CarListItem = ({ navigation, carDetails }: Props) => {
+  if (navigation)
   return (
     <Pressable
       style={styles.carItem}
-      onPress={() => navigation.navigate("Details")}
+      onPress={() => navigation.navigate('Details', {
+        carDetails: carDetails
+      })}
     >
       <Text>Car</Text>
     </Pressable>
@@ -21,17 +28,19 @@ const CarListItem = () => {
 }
 
 const CarListView = () => {
+  const carDetails = { itemName: "Audi A4" };
+
   return (
     <ScrollView
       style={{ flexGrow: 1 }}
       showsHorizontalScrollIndicator={false}
       horizontal
     >
-      <CarListItem />
-      <CarListItem />
-      <CarListItem />
-      <CarListItem />
-      <CarListItem />
+      <CarListItem carDetails={carDetails} />
+      <CarListItem carDetails={carDetails} />
+      <CarListItem carDetails={carDetails} />
+      <CarListItem carDetails={carDetails} />
+      <CarListItem carDetails={carDetails} />
     </ScrollView>
   )
 }
