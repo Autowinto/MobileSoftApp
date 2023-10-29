@@ -13,7 +13,7 @@ type Props = {
 
 export default function Login({ navigation }: Props) {
   const onPress = () => {
-    navigation.navigate("Details")
+    navigation.navigate("CarList")
   }
 
   return (

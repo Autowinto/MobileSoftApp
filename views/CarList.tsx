@@ -84,6 +84,7 @@ const clStyles = StyleSheet.create({
   container: {
     flex: 1,
     // flexDirection: 'column',
+    backgroundColor: '#4F4F4F',
     justifyContent: "space-between",
   },
   textView: {
