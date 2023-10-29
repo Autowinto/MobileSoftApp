@@ -75,7 +75,7 @@ export default function CarList() {
         <Text style={styles.buttonLabel}>Search for cars</Text>
       </Pressable>
       <CarListView />
-      <Dots/>
+      <Dots index={0} amountOfDots={5}/>
     </View>
   )
 }
@@ -96,7 +96,7 @@ const clStyles = StyleSheet.create({
   },
   searchButton: {
     width: 200,
-    height: ,
+    height: 40,
     backgroundColor: "#865AFF",
     borderRadius: 100,
     marginHorizontal: 20,
