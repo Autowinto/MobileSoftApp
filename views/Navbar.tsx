@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
         fontSize: 28,
         letterSpacing: 2,
         color: "#fff",
+        height: '100%'
     },
 })

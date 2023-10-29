@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
-export default function BackCar({ item }: any) {
+export default function CarItem({ item }: any) {
 
   const { width } = useWindowDimensions();
 
