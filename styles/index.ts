@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
+    zIndex: -2
   },
   icon: {
     resizeMode: "contain",
@@ -43,16 +44,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  searchButton: {
-    width: 200,
-    height: 30,
-    backgroundColor: "#865AFF",
-    borderRadius: 100,
-    marginBottom: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-  },
   buttonIcon: {
     width: 21,
     height: 21,
@@ -66,12 +57,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
   },
-  carItem: {
-    width: 150,
+  carListItem: {
+    flex: 1,
+    justifyContent: 'space-between',
+    width: 200,
     marginEnd: 10,
-    height: 150,
+    padding: 10,
+    height: 250,
     borderRadius: 10,
-    backgroundColor: "gray",
+    backgroundColor: "#111111",
+  },
+  carListItemName: {
+    color: '#865AFF',
+    fontSize: 24
+  },
+  carListItemPrice: {
+    color: 'white',
+    fontSize: 24,
   },
   otherButton: {
     width: 300,
