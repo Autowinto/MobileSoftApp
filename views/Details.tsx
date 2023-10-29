@@ -1,10 +1,20 @@
-import { View, Text, StyleSheet, Pressable, FlatList, useWindowDimensions, Animated, ImageBackground } from "react-native"
-import Navbar from "./Navbar"
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  FlatList,
+  useWindowDimensions,
+  Animated,
+  ImageBackground,
+} from "react-native"
+import NavbarTop from "./Navbar"
 import Dots from "./Dots"
 import { useRef, useState } from "react"
 import { CarSlides } from "../slides"
 import CarItem from "./items/CarItem"
 import { Image } from "react-native"
+import NavbarBot from "./NavbarBot"
 const CarListItem = () => (
   <Pressable style={styles.carItem}>
     <Text>Car</Text>
@@ -12,22 +22,19 @@ const CarListItem = () => (
 )
 
 export default function Details() {
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const { width } = useWindowDimensions();
-  const slidesRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const scrollX = useRef(new Animated.Value(0)).current
+  const { width } = useWindowDimensions()
+  const slidesRef = useRef(null)
   const viewableItemsChanged = useRef(({ viewableItems }: any) => {
-    setCurrentIndex(viewableItems[0].index);
-  }
-  ).current;
+    setCurrentIndex(viewableItems[0].index)
+  }).current
 
-  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
-
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
 
   return (
     <View style={styles.container}>
-      <Navbar />
+      <NavbarTop />
       <View style={styles.carList}>
         <FlatList
           data={CarSlides.Mercedes_G.items}
@@ -37,62 +44,90 @@ export default function Details() {
           pagingEnabled
           bounces={false}
           keyExtractor={(item) => item.id}
-          onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }],
-            { useNativeDriver: false })}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            { useNativeDriver: false }
+          )}
           onViewableItemsChanged={viewableItemsChanged}
           viewabilityConfig={viewConfig}
           scrollEventThrottle={32}
           ref={slidesRef}
         />
       </View>
-      <Dots index={currentIndex} amountOfDots={Object.keys(CarSlides.Mercedes_G.items).length} />
+      <Dots
+        index={currentIndex}
+        amountOfDots={Object.keys(CarSlides.Mercedes_G.items).length}
+      />
 
       <View style={styles.carDetailsContainer}>
         <View style={styles.topContainer}>
-          <Text style={styles.title}>{CarSlides.Mercedes_G.name.replaceAll('_', ' ')}</Text>
-          <Text style={styles.price}>From <Text style={styles.innerStyle}>{CarSlides.Mercedes_G.price}</Text>{CarSlides.Mercedes_G.currency} / day </Text>
+          <Text style={styles.title}>
+            {CarSlides.Mercedes_G.name.replaceAll("_", " ")}
+          </Text>
+          <Text style={styles.price}>
+            From{" "}
+            <Text style={styles.innerStyle}>{CarSlides.Mercedes_G.price}</Text>
+            {CarSlides.Mercedes_G.currency} / day{" "}
+          </Text>
         </View>
         <View style={styles.detailsSection}>
           <View style={styles.section}>
             <View style={styles.itemWrapper}>
-              <Image style={styles.icon} source={require('../assets/details/location.png')}></Image>
+              <Image
+                style={styles.icon}
+                source={require("../assets/details/location.png")}
+              ></Image>
               <View>
                 <Text style={{ color: "#454545" }}>Location</Text>
-                <Text style={{ color: "#fff" }}>{CarSlides.Mercedes_G.location}</Text>
+                <Text style={{ color: "#fff" }}>
+                  {CarSlides.Mercedes_G.location}
+                </Text>
               </View>
             </View>
 
             <View style={styles.itemWrapper}>
-              <Image style={styles.icon} source={require('../assets/details/stopwatch.png')}></Image>
+              <Image
+                style={styles.icon}
+                source={require("../assets/details/stopwatch.png")}
+              ></Image>
               <View>
                 <Text style={{ color: "#454545" }}>0-100</Text>
-                <Text style={{ color: "#fff" }}>{CarSlides.Mercedes_G.time_to_100} seconds</Text>
+                <Text style={{ color: "#fff" }}>
+                  {CarSlides.Mercedes_G.time_to_100} seconds
+                </Text>
               </View>
             </View>
           </View>
           <View style={styles.section}>
-
             <View style={styles.itemWrapper}>
-              <Image style={styles.icon} source={require('../assets/details/speedometer.png')}></Image>
+              <Image
+                style={styles.icon}
+                source={require("../assets/details/speedometer.png")}
+              ></Image>
               <View>
                 <Text style={{ color: "#454545" }}>Top speed</Text>
-                <Text style={{ color: "#fff" }}>{CarSlides.Mercedes_G.top_speed} MPH</Text>
+                <Text style={{ color: "#fff" }}>
+                  {CarSlides.Mercedes_G.top_speed} MPH
+                </Text>
               </View>
             </View>
 
             <View style={styles.itemWrapper}>
-              <Image style={styles.icon} source={require('../assets/details/vehicle-type.png')}></Image>
+              <Image
+                style={styles.icon}
+                source={require("../assets/details/vehicle-type.png")}
+              ></Image>
               <View>
                 <Text style={{ color: "#454545" }}>Vehicle Type</Text>
-                <Text style={{ color: "#fff" }}>{CarSlides.Mercedes_G.vehicle_type}</Text>
+                <Text style={{ color: "#fff" }}>
+                  {CarSlides.Mercedes_G.vehicle_type}
+                </Text>
               </View>
             </View>
-
           </View>
         </View>
-
       </View>
-
+      <NavbarBot />
     </View>
   )
 }
@@ -120,7 +155,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   scene: {
-    flex: 1
+    flex: 1,
   },
 
   carDetailsContainer: {
@@ -171,8 +206,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 27,
     aspectRatio: 1,
-    resizeMode: 'contain'
-  }
-
-
+    resizeMode: "contain",
+  },
 })
