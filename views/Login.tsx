@@ -30,8 +30,8 @@ export default function Login({ navigation }: Props) {
       ></ImageBackground>
       <Text style={styles.title}>Autorent</Text>
       <View style={styles.desc}>
-        <Text style={styles.descLabel}>... din foretrukne</Text>
-        <Text style={styles.descLabel}>biludjlenings</Text>
+        <Text style={styles.descLabel}>Your preferred</Text>
+        <Text style={styles.descLabel}>car rental</Text>
         <Text style={styles.descLabel}>expert</Text>
       </View>
 
@@ -43,7 +43,7 @@ export default function Login({ navigation }: Props) {
           ></ImageBackground>
         </View>
         <View style={{ width: 200 }}>
-          <Text style={styles.buttonLabel}>Opret en bruger med Apple</Text>
+          <Text style={styles.buttonLabel}>Sign up with Apple ID</Text>
         </View>
       </Pressable>
 
@@ -55,14 +55,14 @@ export default function Login({ navigation }: Props) {
           ></ImageBackground>
         </View>
         <View style={{ width: 200 }}>
-          <Text style={styles.buttonLabel}>Andre oprettelses muligheder</Text>
+          <Text style={styles.buttonLabel}>Other sign up methods</Text>
         </View>
       </Pressable>
 
       <View style={styles.footer}>
-        <Text style={{ color: "#8C8C8C" }}>Har du allerede en bruger?</Text>
+        <Text style={{ color: "#8C8C8C" }}>Already have a user?</Text>
         <Pressable onPress={onPress}>
-          <Text style={{ color: "#865AFF", fontWeight: "600" }}>Login her</Text>
+          <Text style={{ color: "#865AFF", fontWeight: "600" }}>Sign in</Text>
         </Pressable>
       </View>
     </View>
