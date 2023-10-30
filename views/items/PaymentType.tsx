@@ -9,12 +9,13 @@ import {
   useWindowDimensions,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { Car } from "../../utils/data";
 
 export default function PaymentType({ item }: any) {
 
   const { width } = useWindowDimensions();
   const paymentMethods = item[0]
-  const carDetails = item[1]
+  const carDetails:Car = item[1]
   return (
     <View style={[styles.paymentContainer, { width: width / 3.5, aspectRatio: 1 }]}>
       <View style={styles.inner}>
@@ -25,8 +26,8 @@ export default function PaymentType({ item }: any) {
         <View>
           <Text style={styles.title}>{paymentMethods.name}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
-          <Text style={{color: '#fff', fontSize: 18, fontWeight: '400'}}>{carDetails.price}</Text> 
-            <Text style={styles.title}>{carDetails.currency} / hour </Text>
+          <Text style={{color: '#fff', fontSize: 18, fontWeight: '400'}}>{carDetails.price_per_day}</Text> 
+            <Text style={styles.title}>$/hour </Text>
           </View>
         </View>
       </View>

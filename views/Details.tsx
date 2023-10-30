@@ -20,13 +20,32 @@ import paymentMethods from "../paymentMethods"
 import PaymentType from "./items/PaymentType"
 import NavbarTop from "./NavbarTop"
 import { Car, getCarData, updateCar } from "../utils/data"
+
 const CarListItem = () => (
   <Pressable style={styles.carItem}>
     <Text>Car</Text>
   </Pressable>
 )
 
-export default function Details({ route }) {
+
+const getImages = () => {
+  return [
+    {
+      id: '1',
+      title: 'Slide 1',
+      description: 'Front',
+      image: require('../assets/flatlist/car-front.png'),
+    },
+    {
+      id: '2',
+      title: 'Slide 2',
+      description: 'Back',
+      image: require('../assets/flatlist/car-back.png'),
+    }
+  ]
+}
+
+export default function Details({ route }: any) {
   const { id } = route.params
   useEffect(() => {
     console.log(route)
@@ -34,6 +53,7 @@ export default function Details({ route }) {
     const fetchData = async () => {
       await getCarData().then((res) => {
         setCar(res[id])
+        console.log(res[id])
       })
     }
     fetchData()
@@ -63,7 +83,7 @@ export default function Details({ route }) {
       <NavbarTop />
       <View style={styles.carList}>
         <FlatList
-          data={CarSlides.Mercedes_G.items}
+          data={getImages()}
           renderItem={({ item }) => <CarItem item={item}></CarItem>}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -82,240 +102,247 @@ export default function Details({ route }) {
       </View>
       <Dots
         index={currentIndex}
-        amountOfDots={Object.keys(CarSlides.Mercedes_G.items).length}
+        amountOfDots={2}
       />
 
-      {open ? (
+
+      <View style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        {open ? (
+          <View
+            style={[
+              {
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                marginLeft: 20,
+                marginBottom: 20,
+                marginTop: 20,
+                gap: 10,
+                alignItems: "center",
+              },
+            ]}
+          >
+            <Image
+              style={styles.icon}
+              source={require("../assets/details/location.png")}
+            ></Image>
+            <Text style={{ color: "#fff" }}>{car?.location}</Text>
+          </View>
+        ) : null}
         <View
           style={[
-            {
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              marginLeft: 50,
-              marginBottom: 20,
-              marginTop: 20,
-              gap: 10,
-              alignItems: "center",
-            },
+            styles.carDetailsContainer,
+            { display: open ? "none" : "flex", marginBottom: 75, width: "100%" },
           ]}
         >
-          <Image
-            style={styles.icon}
-            source={require("../assets/details/location.png")}
-          ></Image>
-          <Text style={{ color: "#fff" }}>{CarSlides.Mercedes_G.location}</Text>
-        </View>
-      ) : null}
-      <View
-        style={[
-          styles.carDetailsContainer,
-          { display: open ? "none" : "flex", marginBottom: 75 },
-        ]}
-      >
-        <View style={styles.topContainer}>
-          <Text style={styles.title}>
-            {CarSlides.Mercedes_G.name.replaceAll("_", " ")}
-          </Text>
-          <Text style={styles.price}>
-            From{" "}
-            <Text style={styles.innerStyle}>{CarSlides.Mercedes_G.price}</Text>
-            {CarSlides.Mercedes_G.currency} / day{" "}
-          </Text>
-        </View>
-        <View style={styles.detailsSection}>
-          <View style={styles.section}>
-            <View style={styles.itemWrapper}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/details/location.png")}
-              ></Image>
-              <View>
-                <Text style={{ color: "#454545" }}>Location</Text>
-                <Text style={{ color: "#fff" }}>
-                  {CarSlides.Mercedes_G.location}
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.itemWrapper}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/details/stopwatch.png")}
-              ></Image>
-              <View>
-                <Text style={{ color: "#454545" }}>0-100</Text>
-                <Text style={{ color: "#fff" }}>
-                  {CarSlides.Mercedes_G.time_to_100} seconds
-                </Text>
-              </View>
-            </View>
+          <View style={styles.topContainer}>
+            <Text style={styles.title}>
+              {car?.car_type}
+            </Text>
+            <Text style={styles.price}>
+              From{" "}
+              <Text style={styles.innerStyle}>{car?.price_per_day}</Text>
+              $ / day{" "}
+            </Text>
           </View>
-          <View style={styles.section}>
-            <View style={styles.itemWrapper}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/details/speedometer.png")}
-              ></Image>
-              <View>
-                <Text style={{ color: "#454545" }}>Top speed</Text>
-                <Text style={{ color: "#fff" }}>
-                  {CarSlides.Mercedes_G.top_speed} MPH
-                </Text>
+          <View style={styles.detailsSection}>
+            <View style={styles.section}>
+              <View style={styles.itemWrapper}>
+                <Image
+                  style={styles.icon}
+                  source={require("../assets/details/location.png")}
+                ></Image>
+                <View>
+                  <Text style={{ color: "#454545" }}>Location</Text>
+                  <Text style={{ color: "#fff" }}>
+                    {car?.location}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.itemWrapper}>
+                <Image
+                  style={styles.icon}
+                  source={require("../assets/details/stopwatch.png")}
+                ></Image>
+                <View>
+                  <Text style={{ color: "#454545" }}>0-100</Text>
+                  <Text style={{ color: "#fff" }}>
+                    {5.5} seconds
+                  </Text>
+                </View>
               </View>
             </View>
+            <View style={styles.section}>
+              <View style={styles.itemWrapper}>
+                <Image
+                  style={styles.icon}
+                  source={require("../assets/details/speedometer.png")}
+                ></Image>
+                <View>
+                  <Text style={{ color: "#454545" }}>Top speed</Text>
+                  <Text style={{ color: "#fff" }}>
+                    {200} MPH
+                  </Text>
+                </View>
+              </View>
 
-            <View style={styles.itemWrapper}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/details/vehicle-type.png")}
-              ></Image>
-              <View>
-                <Text style={{ color: "#454545" }}>Vehicle Type</Text>
-                <Text style={{ color: "#fff" }}>
-                  {CarSlides.Mercedes_G.vehicle_type}
-                </Text>
+              <View style={styles.itemWrapper}>
+                <Image
+                  style={styles.icon}
+                  source={require("../assets/details/vehicle-type.png")}
+                ></Image>
+                <View>
+                  <Text style={{ color: "#454545" }}>Vehicle Model</Text>
+                  <Text style={{ color: "#fff" }}>
+                    {car?.model}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
-
-      <View
-        style={{
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          onTouchStart={() => {
-            setOpen(open ? false : true)
-          }}
-        >
-          <View
-            style={{
-              width: 36,
-              height: 6,
-              backgroundColor: "#4F4F4F",
-              borderRadius: 10,
-              marginBottom: 20,
-            }}
-          ></View>
-        </View>
-        <View
-          style={{
-            width: "90%",
-            height: 50,
-            opacity: open ? 1 : 0.15,
-            overflow: "hidden",
-          }}
-          onTouchStart={() => {
-            setOpen(open ? false : true)
-          }}
-        >
-          <Text style={{ color: "#fff", fontSize: 25 }}>Choose your plan</Text>
-        </View>
-
-        <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
-          <FlatList
-            data={paymentMethods}
-            renderItem={({ item }) => (
-              <PaymentType item={[item, CarSlides.Mercedes_G]} />
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            bounces={false}
-            keyExtractor={(item) => item.id.toString()}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-              { useNativeDriver: false }
-            )}
-            viewabilityConfig={viewConfig}
-            onViewableItemsChanged={viewableItemsChanged2}
-            scrollEventThrottle={16}
-            ItemSeparatorComponent={() => <View style={{ width: 45 }} />}
-            ref={slidesRef2}
-            snapToAlignment="center"
-            snapToOffsets={paymentMethods.map(
-              (_, index) => index * (width / 3.5 + 45)
-            )}
-            contentContainerStyle={{
-              paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2,
-            }}
-          />
-        </View>
 
         <View
           style={{
-            maxHeight: 42,
             width: "100%",
-            paddingRight: 15,
-            paddingLeft: 15,
-            flexDirection: "row",
-            justifyContent: "space-around",
+            alignItems: "center",
+            backgroundColor: "#111122",
+            marginTop: open ? 20 : -75,
+            paddingTop: 20
           }}
         >
           <View
-            style={{
-              aspectRatio: 1,
-              width: 42,
-              borderRadius: 100,
-              backgroundColor: "#151515",
-              alignItems: "center",
-              justifyContent: "center",
+            onTouchStart={() => {
+              setOpen(open ? false : true)
             }}
           >
-            <ImageBackground
-              source={require("../assets/arrow-right.png")}
-              style={{ aspectRatio: 1, width: 21 }}
-            ></ImageBackground>
-          </View>
-          <Pressable
-            onPress={() => {
-              if (!car) {
-                console.error("NO CAR DEFINED")
-                return
-              }
-              car.available = false
-              updateCar(id, car)
-            }}
-            style={{
-              width: 286,
-              height: 42,
-              backgroundColor: "#865AFF",
-              borderRadius: 25,
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#FFFFFF", fontSize: 14 }}>Rent car now</Text>
             <View
               style={{
-                flexDirection: "row",
-                gap: 10,
-                height: 42,
+                width: 36,
+                height: 6,
+                backgroundColor: "#4F4F4F",
+                borderRadius: 10,
+                marginBottom: 20,
+              }}
+            ></View>
+          </View>
+          <View
+            style={{
+              width: "90%",
+              height: 50,
+              opacity: open ? 1 : 0.15,
+              overflow: "hidden",
+            }}
+            onTouchStart={() => {
+              setOpen(open ? false : true)
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 25 }}>Choose your plan</Text>
+          </View>
+
+          <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
+            <FlatList
+              data={paymentMethods}
+              renderItem={({ item }) => (
+                <PaymentType item={[item, car]} />
+              )}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled
+              bounces={false}
+              keyExtractor={(item) => item.id.toString()}
+              onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                { useNativeDriver: false }
+              )}
+              viewabilityConfig={viewConfig}
+              onViewableItemsChanged={viewableItemsChanged2}
+              scrollEventThrottle={16}
+              ItemSeparatorComponent={() => <View style={{ width: 45 }} />}
+              ref={slidesRef2}
+              snapToAlignment="center"
+              snapToOffsets={paymentMethods.map(
+                (_, index) => index * (width / 3.5 + 45)
+              )}
+              contentContainerStyle={{
+                paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2,
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              maxHeight: 42,
+              width: "100%",
+              paddingRight: 15,
+              paddingLeft: 15,
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <View
+              style={{
+                aspectRatio: 1,
+                width: 42,
+                borderRadius: 100,
+                backgroundColor: "#151515",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <Text style={{ color: "#FFFFFF", fontSize: 14 }}>
-                {CarSlides.Mercedes_G.price} {CarSlides.Mercedes_G.currency} /
-                hour
-              </Text>
-
               <ImageBackground
-                source={require("../assets/check-circle.png")}
+                source={require("../assets/arrow-right.png")}
                 style={{ aspectRatio: 1, width: 21 }}
               ></ImageBackground>
             </View>
-          </Pressable>
+            <Pressable
+              onPress={() => {
+                if (!car) {
+                  console.error("NO CAR DEFINED")
+                  return
+                }
+                car.available = false
+                updateCar(id, car)
+              }}
+              style={{
+                width: 286,
+                height: 42,
+                backgroundColor: "#865AFF",
+                borderRadius: 25,
+                flexDirection: "row",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: "#FFFFFF", fontSize: 14 }}>Rent car now</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  gap: 10,
+                  height: 42,
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ color: "#FFFFFF", fontSize: 14 }}>
+                  {car?.price_per_day} $ /
+                  hour
+                </Text>
+
+                <ImageBackground
+                  source={require("../assets/check-circle.png")}
+                  style={{ aspectRatio: 1, width: 21 }}
+                ></ImageBackground>
+              </View>
+            </Pressable>
+          </View>
         </View>
       </View>
-
-      <NavbarBot />
+      <>
+        <NavbarBot />
+      </>
     </View>
+
   )
 }
 
@@ -374,6 +401,8 @@ const styles = StyleSheet.create({
   detailsSection: {
     flexDirection: "column",
     gap: 10,
+    height: 200,
+    width: "100%",
   },
 
   section: {
