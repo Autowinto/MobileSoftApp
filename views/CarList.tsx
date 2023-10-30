@@ -12,13 +12,13 @@ import Navbar from "./Navbar"
 import styles from "../styles"
 import Dots from "./Dots"
 import { useEffect, useState } from "react"
-import { getCarData } from "../utils/data"
+import { Car, getCarData } from "../utils/data"
 
 type CarListItemProps = {
-  path: string
+  car: Car
 }
 
-const CarListItem = () => {
+const CarListItem = (props: CarListItemProps) => {
   const navigation = useNavigation()
   return (
     <Pressable
@@ -29,8 +29,8 @@ const CarListItem = () => {
         style={{ width: "100%", height: "100%", position: "absolute" }}
         source={require("../assets/flatlist/car-front.png")}
       ></ImageBackground>
-      <Text style={styles.carListItemName}>Aston Martin DB7</Text>
-      <Text style={styles.carListItemPrice}>564 kr./day</Text>
+      <Text style={styles.carListItemName}>{props.car.make} {props.car.model}</Text>
+      <Text style={styles.carListItemPrice}>{props.car.price_per_day}kr./day</Text>
     </Pressable>
   )
 }
@@ -40,7 +40,7 @@ const CarListView = () => {
   useEffect(() => {
     getCarData().then(res => setCarList(res))
   })
-  const carListItems = carList.map(car => <CarListItem/>)
+  const carListItems = carList.map(car => <CarListItem car={car} />)
   return (
     <View style={{ height: styles.carListItem.height, marginBottom: 150}}>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>

@@ -1,7 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from 'axios'
 
-export async function getCarData() {
+export interface Car {
+    make: string
+    model: string
+    year: number
+    car_type: string
+    price_per_day: number
+    location: string
+    available: boolean
+}
+
+export async function getCarData(): Promise<Car[]> {
         const localData = await AsyncStorage.getItem('cars')
         if (!localData) await fetchCarData()
 
