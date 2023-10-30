@@ -13,7 +13,7 @@ import Navbar from "./Navbar"
 import styles from "../styles"
 import Dots from "./Dots"
 import { useEffect, useState } from "react"
-import { Car, getCarData } from "../utils/data"
+import { Car, getCarData, updateCar } from "../utils/data"
 import NavbarBot from "./NavbarBot"
 
 type CarListItemProps = {
