@@ -5,11 +5,15 @@ import Details from "./views/Details"
 import CarList from "./views/CarList"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { useEffect } from "react"
+import { getCarData } from "./utils/data"
 
 const Stack = createNativeStackNavigator()
 
 export default function App() { 
   useEffect(() => {
+    getCarData().then((res) => {
+      console.log(res)
+    })
     console.log('Aooga')
   })
   return (
