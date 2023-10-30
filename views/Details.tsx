@@ -27,7 +27,6 @@ const CarListItem = () => (
   </Pressable>
 )
 
-
 const getImages = () => {
   return [
     {
@@ -54,14 +53,15 @@ export default function Details({ route }: any) {
       await getCarData().then((res) => {
         setCar(res[id])
         console.log(res[id])
+        setIsLoaded(true)
       })
     }
     fetchData()
   }, [])
 
   const [car, setCar] = useState<Car>()
+  const [isLoaded, setIsLoaded] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [currentIndex2, setCurrentIndex2] = useState(0)
   const [open, setOpen] = useState(false)
   const scrollX = useRef(new Animated.Value(0)).current
   const { width } = useWindowDimensions()
@@ -72,9 +72,6 @@ export default function Details({ route }: any) {
     setCurrentIndex(viewableItems[0].index)
   }).current
 
-  const viewableItemsChanged2 = useRef(({ viewableItems }: any) => {
-    setCurrentIndex2(viewableItems[0].index)
-  }).current
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
 
@@ -241,11 +238,11 @@ export default function Details({ route }: any) {
             <Text style={{ color: "#fff", fontSize: 25 }}>Choose your plan</Text>
           </View>
 
-          <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
+          {isLoaded ? <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
             <FlatList
               data={paymentMethods}
               renderItem={({ item }) => (
-                <PaymentType item={[item, car]} />
+                <PaymentType item={{payment_methods: item, car}} />
               )}
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -257,7 +254,6 @@ export default function Details({ route }: any) {
                 { useNativeDriver: false }
               )}
               viewabilityConfig={viewConfig}
-              onViewableItemsChanged={viewableItemsChanged2}
               scrollEventThrottle={16}
               ItemSeparatorComponent={() => <View style={{ width: 45 }} />}
               ref={slidesRef2}
@@ -269,7 +265,7 @@ export default function Details({ route }: any) {
                 paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2,
               }}
             />
-          </View>
+          </View>: null}
 
           <View
             style={{

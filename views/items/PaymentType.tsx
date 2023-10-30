@@ -14,8 +14,8 @@ import { Car } from "../../utils/data";
 export default function PaymentType({ item }: any) {
 
   const { width } = useWindowDimensions();
-  const paymentMethods = item[0]
-  const carDetails:Car = item[1]
+  const paymentMethods = item.payment_methods;
+  const carDetails = item.car;
   return (
     <View style={[styles.paymentContainer, { width: width / 3.5, aspectRatio: 1 }]}>
       <View style={styles.inner}>
