@@ -5,6 +5,11 @@ import Details from "./views/Details"
 import CarList from "./views/CarList"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 
+// Remove this for persistent data
+
+import AsyncStorage from "@react-native-async-storage/async-storage"
+AsyncStorage.clear()
+
 const Stack = createNativeStackNavigator()
 
 export default function App() {
