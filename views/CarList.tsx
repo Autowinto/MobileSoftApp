@@ -17,6 +17,7 @@ import { Car, getCarData } from "../utils/data"
 import NavbarBot from "./NavbarBot"
 
 type CarListItemProps = {
+  index: number,
   car: Car
 }
 
@@ -25,7 +26,7 @@ const CarListItem = (props: CarListItemProps) => {
   return (
     <Pressable
       style={styles.carListItem}
-      onPress={() => navigation.navigate("Details")}
+      onPress={() => navigation.navigate("Details",{id: props.index})}
     >
       <ImageBackground
         style={{ width: "100%", height: "100%", position: "absolute" }}
@@ -42,7 +43,7 @@ const CarListView = () => {
   useEffect(() => {
     getCarData().then(res => setCarList(res))
   })
-  const carListItems = carList.map(car => <CarListItem car={car} />)
+  const carListItems = carList.map((car, index) => <CarListItem car={car} index={index} key={index} />)
   return (
     <View style={{flexDirection: 'column',  height: styles.carListItem.height * 1.2, marginBottom: 150}}>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>

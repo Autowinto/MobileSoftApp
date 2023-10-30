@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable, FlatList, useWindowDimensions, Animated, ImageBackground, ScrollView } from "react-native"
 import Navbar from "./Navbar"
 import Dots from "./Dots"
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { CarSlides } from "../slides"
 import CarItem from "./items/CarItem"
 import { Image } from "react-native"
@@ -9,14 +9,24 @@ import NavbarBot from "./NavbarBot"
 import paymentMethods from "../paymentMethods"
 import PaymentType from "./items/PaymentType"
 import NavbarTop from "./NavbarTop"
+import { Car, getCarData } from "../utils/data"
 const CarListItem = () => (
   <Pressable style={styles.carItem}>
     <Text>Car</Text>
   </Pressable>
 )
 
-export default function Details() {
-
+export default function Details({route}) {
+  useEffect(() => {
+    const {id} = route.params
+    console.log(route)
+    console.log(id)
+    getCarData().then((res)=> {
+      setCar(res[id])
+    })
+  }, [])
+  
+  const [car, setCar] = useState<Car>()
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentIndex2, setCurrentIndex2] = useState(0);
   const [open, setOpen] = useState(false);
