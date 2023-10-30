@@ -11,6 +11,8 @@ import { useNavigation } from "@react-navigation/native"
 import Navbar from "./Navbar"
 import styles from "../styles"
 import Dots from "./Dots"
+import { useEffect, useState } from "react"
+import { getCarData } from "../utils/data"
 
 type CarListItemProps = {
   path: string
@@ -34,20 +36,22 @@ const CarListItem = () => {
 }
 
 const CarListView = () => {
+  const [carList, setCarList] = useState([])
+  useEffect(() => {
+    getCarData().then(res => setCarList(res))
+  })
+  const carListItems = carList.map(car => <CarListItem/>)
   return (
     <View style={{ height: styles.carListItem.height, marginBottom: 150}}>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>
-        <CarListItem />
-        <CarListItem />
-        <CarListItem />
-        <CarListItem />
-        <CarListItem />
+        {carListItems}
       </ScrollView>
     </View>
   )
 }
 
 export default function CarList() {
+
   return (
     <View style={{ ...clStyles.container }}>
       <ImageBackground
