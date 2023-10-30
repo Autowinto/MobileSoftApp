@@ -129,7 +129,7 @@ export default function Details({ route }: any) {
         <View
           style={[
             styles.carDetailsContainer,
-            { display: open ? "none" : "flex", marginBottom: 75, width: "100%" },
+            { display: open ? "none" : "flex", marginBottom: 75, width: "100%", height: '50%' },
           ]}
         >
           <View style={styles.topContainer}>
@@ -242,7 +242,7 @@ export default function Details({ route }: any) {
             <FlatList
               data={paymentMethods}
               renderItem={({ item }) => (
-                <PaymentType item={{payment_methods: item, car}} />
+                <PaymentType item={{ payment_methods: item, car }} />
               )}
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -265,7 +265,7 @@ export default function Details({ route }: any) {
                 paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2,
               }}
             />
-          </View>: null}
+          </View> : null}
 
           <View
             style={{
