@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 import Navbar from "./Navbar"
 import styles from "../styles"
 import Dots from "./Dots"
+import axios from "axios"
 
 type CarListItemProps = {
   path: string

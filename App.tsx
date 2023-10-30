@@ -4,10 +4,14 @@ import Login from "./views/Login"
 import Details from "./views/Details"
 import CarList from "./views/CarList"
 import { SafeAreaProvider } from "react-native-safe-area-context"
+import { useEffect } from "react"
 
 const Stack = createNativeStackNavigator()
 
-export default function App() {
+export default function App() { 
+  useEffect(() => {
+    console.log('Aooga')
+  })
   return (
     <SafeAreaProvider>
       <NavigationContainer>
