@@ -9,10 +9,8 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native"
-import Navbar from "./Navbar"
 import Dots from "./Dots"
 import React, { useEffect, useRef, useState } from "react"
-import { CarSlides } from "../slides"
 import CarItem from "./items/CarItem"
 import { Image } from "react-native"
 import NavbarBot from "./NavbarBot"
