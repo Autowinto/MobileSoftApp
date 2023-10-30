@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    zIndex: -2
+    zIndex: -2,
   },
   icon: {
     resizeMode: "contain",
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   carListItem: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     width: 200,
     marginEnd: 10,
     padding: 10,
@@ -67,12 +67,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#111111",
   },
+  carListItemUnavailable: {
+    flex: 1,
+    justifyContent: "space-between",
+    width: 200,
+    marginEnd: 10,
+    padding: 10,
+    height: 250,
+    borderRadius: 10,
+    backgroundColor: "#660007",
+  },
   carListItemName: {
-    color: '#865AFF',
-    fontSize: 24
+    color: "#865AFF",
+    fontSize: 24,
   },
   carListItemPrice: {
-    color: 'white',
+    color: "white",
     fontSize: 24,
   },
   otherButton: {

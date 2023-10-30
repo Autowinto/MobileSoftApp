@@ -17,7 +17,7 @@ import { Car, getCarData } from "../utils/data"
 import NavbarBot from "./NavbarBot"
 
 type CarListItemProps = {
-  index: number,
+  index: number
   car: Car
 }
 
@@ -25,15 +25,22 @@ const CarListItem = (props: CarListItemProps) => {
   const navigation = useNavigation()
   return (
     <Pressable
-      style={styles.carListItem}
-      onPress={() => navigation.navigate("Details",{id: props.index})}
+      disabled={!props.car.available}
+      style={
+        props.car.available ? styles.carListItem : styles.carListItemUnavailable
+      }
+      onPress={() => navigation.navigate("Details", { id: props.index })}
     >
       <ImageBackground
         style={{ width: "100%", height: "100%", position: "absolute" }}
         source={require("../assets/flatlist/car-front.png")}
       ></ImageBackground>
-      <Text style={styles.carListItemName}>{props.car.make} {props.car.model}</Text>
-      <Text style={styles.carListItemPrice}>{props.car.price_per_day}kr./day</Text>
+      <Text style={styles.carListItemName}>
+        {props.car.make} {props.car.model}
+      </Text>
+      <Text style={styles.carListItemPrice}>
+        {props.car.price_per_day}kr./day
+      </Text>
     </Pressable>
   )
 }
@@ -41,11 +48,19 @@ const CarListItem = (props: CarListItemProps) => {
 const CarListView = () => {
   const [carList, setCarList] = useState<Car[]>([])
   useEffect(() => {
-    getCarData().then(res => setCarList(res))
+    getCarData().then((res) => setCarList(res))
   })
-  const carListItems = carList.map((car, index) => <CarListItem car={car} index={index} key={index} />)
+  const carListItems = carList.map((car, index) => (
+    <CarListItem car={car} index={index} key={index} />
+  ))
   return (
-    <View style={{flexDirection: 'column',  height: styles.carListItem.height * 1.2, marginBottom: 150}}>
+    <View
+      style={{
+        flexDirection: "column",
+        height: styles.carListItem.height * 1.2,
+        marginBottom: 150,
+      }}
+    >
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>
         {carListItems}
       </ScrollView>
@@ -54,7 +69,6 @@ const CarListView = () => {
 }
 
 export default function CarList() {
-
   return (
     <View style={{ ...clStyles.container }}>
       <ImageBackground
@@ -77,13 +91,15 @@ export default function CarList() {
         </Text>
       </View>
       <Pressable style={clStyles.searchButton}>
-        <Image style={styles.buttonIcon} source={require('../assets/search.png')}></Image>
+        <Image
+          style={styles.buttonIcon}
+          source={require("../assets/search.png")}
+        ></Image>
         <Text style={styles.buttonLabel}>Search for cars</Text>
       </Pressable>
 
       <CarListView />
       <NavbarBot />
-
     </View>
   )
 }
@@ -92,7 +108,7 @@ const clStyles = StyleSheet.create({
   container: {
     flex: 1,
     // flexDirection: 'column',
-    backgroundColor: '#4F4F4F',
+    backgroundColor: "#4F4F4F",
     gap: 15,
   },
   textView: {
@@ -101,7 +117,7 @@ const clStyles = StyleSheet.create({
   searchIcon: {
     width: 20,
     height: 20,
-    marginRight: 5
+    marginRight: 5,
   },
   searchButton: {
     width: 200,
@@ -110,7 +126,7 @@ const clStyles = StyleSheet.create({
     borderRadius: 100,
     marginHorizontal: 20,
     justifyContent: "center",
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
   },
 })
