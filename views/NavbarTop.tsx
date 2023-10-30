@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         gap: 10,
         width: 200,
+        height: 57,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",

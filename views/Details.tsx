@@ -15,17 +15,6 @@ const CarListItem = () => (
   </Pressable>
 )
 
-const data = [
-  {
-    id: "1",
-    title: "First Item",
-  },
-  {
-    id: "2",
-    title: "Second Item",
-  }
-]
-
 export default function Details() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,6 +24,7 @@ export default function Details() {
   const { width } = useWindowDimensions();
   const slidesRef = useRef(null);
   const slidesRef2 = useRef(null);
+
   const viewableItemsChanged = useRef(({ viewableItems }: any) => {
     setCurrentIndex(viewableItems[0].index);
   }
@@ -166,7 +156,7 @@ export default function Details() {
         <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
           <FlatList
             data={paymentMethods}
-            renderItem={({ item }) => <PaymentType item={item} />}
+            renderItem={({ item }) => <PaymentType item={[item, CarSlides.Mercedes_G]} />}
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled
@@ -182,6 +172,39 @@ export default function Details() {
             snapToOffsets={paymentMethods.map((_, index) => index * (width / 3.5 + 45))}
             contentContainerStyle={{ paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2 }}
           />
+        </View>
+
+        <View style={{
+          maxHeight: 42, width: '100%', paddingRight: 15, paddingLeft: 15, flexDirection: 'row',
+          justifyContent: 'space-around'
+        }}>
+          <View style={{
+            aspectRatio: 1, width: 42, borderRadius: 100, backgroundColor: '#151515',
+            alignItems: 'center', justifyContent: 'center'
+          }}>
+            <ImageBackground
+              source={require('../assets/arrow-right.png')}
+              style={{ aspectRatio: 1, width: 21 }}
+            ></ImageBackground>
+          </View>
+          <View style={{
+            width: 286, height: 42, backgroundColor: '#865AFF', borderRadius: 25,
+            flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'
+          }}>
+            <Text style={{ color: '#FFFFFF', fontSize: 14 }}>
+              Rent car now
+            </Text>
+            <View style= {{flexDirection: 'row', gap: 10, height: 42, alignItems: 'center'}}>
+              <Text style={{ color: '#FFFFFF', fontSize: 14 }}>
+                {CarSlides.Mercedes_G.price} {CarSlides.Mercedes_G.currency} / hour
+              </Text>
+
+              <ImageBackground
+                source={require('../assets/check-circle.png')}
+                style={{ aspectRatio: 1, width: 21 }}
+              ></ImageBackground>
+            </View>
+          </View>
         </View>
 
       </View>

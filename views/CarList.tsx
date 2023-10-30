@@ -6,6 +6,7 @@ import {
   Pressable,
   Image,
   ImageBackground,
+  FlatList,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import Navbar from "./Navbar"
@@ -13,6 +14,7 @@ import styles from "../styles"
 import Dots from "./Dots"
 import { useEffect, useState } from "react"
 import { Car, getCarData } from "../utils/data"
+import NavbarBot from "./NavbarBot"
 
 type CarListItemProps = {
   car: Car
@@ -36,13 +38,13 @@ const CarListItem = (props: CarListItemProps) => {
 }
 
 const CarListView = () => {
-  const [carList, setCarList] = useState([])
+  const [carList, setCarList] = useState<Car[]>([])
   useEffect(() => {
     getCarData().then(res => setCarList(res))
   })
   const carListItems = carList.map(car => <CarListItem car={car} />)
   return (
-    <View style={{ height: styles.carListItem.height, marginBottom: 150}}>
+    <View style={{flexDirection: 'column',  height: styles.carListItem.height * 1.2, marginBottom: 150}}>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>
         {carListItems}
       </ScrollView>
@@ -73,13 +75,14 @@ export default function CarList() {
           rental expert
         </Text>
       </View>
-
       <Pressable style={clStyles.searchButton}>
         <Image style={styles.buttonIcon} source={require('../assets/search.png')}></Image>
         <Text style={styles.buttonLabel}>Search for cars</Text>
       </Pressable>
+
       <CarListView />
-      <Dots index={0} amountOfDots={5}/>
+      <NavbarBot />
+
     </View>
   )
 }
@@ -89,7 +92,7 @@ const clStyles = StyleSheet.create({
     flex: 1,
     // flexDirection: 'column',
     backgroundColor: '#4F4F4F',
-    justifyContent: "space-between",
+    gap: 15,
   },
   textView: {
     marginHorizontal: 20,
@@ -105,7 +108,7 @@ const clStyles = StyleSheet.create({
     backgroundColor: "#865AFF",
     borderRadius: 100,
     marginHorizontal: 20,
-    justifyContent: "center",    
+    justifyContent: "center",
     alignItems: 'center',
     flexDirection: 'row',
   },
