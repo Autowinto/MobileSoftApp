@@ -8,6 +8,7 @@ import {
   Animated,
   ImageBackground,
   ScrollView,
+  Alert,
 } from "react-native"
 import Dots from "./Dots"
 import React, { useEffect, useRef, useState } from "react"
@@ -18,6 +19,7 @@ import paymentMethods from "../paymentMethods"
 import PaymentType from "./items/PaymentType"
 import NavbarTop from "./NavbarTop"
 import { Car, getCarData, updateCar } from "../utils/data"
+import { useNavigation } from "@react-navigation/native"
 
 const CarListItem = () => (
   <Pressable style={styles.carItem}>
@@ -28,21 +30,22 @@ const CarListItem = () => (
 const getImages = () => {
   return [
     {
-      id: '1',
-      title: 'Slide 1',
-      description: 'Front',
-      image: require('../assets/flatlist/car-front.png'),
+      id: "1",
+      title: "Slide 1",
+      description: "Front",
+      image: require("../assets/flatlist/car-front.png"),
     },
     {
-      id: '2',
-      title: 'Slide 2',
-      description: 'Back',
-      image: require('../assets/flatlist/car-back.png'),
-    }
+      id: "2",
+      title: "Slide 2",
+      description: "Back",
+      image: require("../assets/flatlist/car-back.png"),
+    },
   ]
 }
 
 export default function Details({ route }: any) {
+  const navigation = useNavigation()
   const { id } = route.params
   useEffect(() => {
     console.log(route)
@@ -70,12 +73,12 @@ export default function Details({ route }: any) {
     setCurrentIndex(viewableItems[0].index)
   }).current
 
-
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
 
   return (
     <View style={styles.container}>
       <NavbarTop />
+
       <View style={styles.carList}>
         <FlatList
           data={getImages()}
@@ -95,13 +98,11 @@ export default function Details({ route }: any) {
           ref={slidesRef}
         />
       </View>
-      <Dots
-        index={currentIndex}
-        amountOfDots={2}
-      />
+      <Dots index={currentIndex} amountOfDots={2} />
 
-
-      <View style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <View
+        style={{ display: "flex", flexDirection: "column", height: "100%" }}
+      >
         {open ? (
           <View
             style={[
@@ -127,17 +128,19 @@ export default function Details({ route }: any) {
         <View
           style={[
             styles.carDetailsContainer,
-            { display: open ? "none" : "flex", marginBottom: 75, width: "100%", height: '50%' },
+            {
+              display: open ? "none" : "flex",
+              marginBottom: 75,
+              width: "100%",
+              height: "50%",
+            },
           ]}
         >
           <View style={styles.topContainer}>
-            <Text style={styles.title}>
-              {car?.car_type}
-            </Text>
+            <Text style={styles.title}>{car?.car_type}</Text>
             <Text style={styles.price}>
-              From{" "}
-              <Text style={styles.innerStyle}>{car?.price_per_day}</Text>
-              $ / day{" "}
+              From <Text style={styles.innerStyle}>{car?.price_per_day}</Text>$
+              / day{" "}
             </Text>
           </View>
           <View style={styles.detailsSection}>
@@ -149,9 +152,7 @@ export default function Details({ route }: any) {
                 ></Image>
                 <View>
                   <Text style={{ color: "#454545" }}>Location</Text>
-                  <Text style={{ color: "#fff" }}>
-                    {car?.location}
-                  </Text>
+                  <Text style={{ color: "#fff" }}>{car?.location}</Text>
                 </View>
               </View>
 
@@ -162,9 +163,7 @@ export default function Details({ route }: any) {
                 ></Image>
                 <View>
                   <Text style={{ color: "#454545" }}>0-100</Text>
-                  <Text style={{ color: "#fff" }}>
-                    {5.5} seconds
-                  </Text>
+                  <Text style={{ color: "#fff" }}>{5.5} seconds</Text>
                 </View>
               </View>
             </View>
@@ -176,9 +175,7 @@ export default function Details({ route }: any) {
                 ></Image>
                 <View>
                   <Text style={{ color: "#454545" }}>Top speed</Text>
-                  <Text style={{ color: "#fff" }}>
-                    {200} MPH
-                  </Text>
+                  <Text style={{ color: "#fff" }}>{200} MPH</Text>
                 </View>
               </View>
 
@@ -189,9 +186,7 @@ export default function Details({ route }: any) {
                 ></Image>
                 <View>
                   <Text style={{ color: "#454545" }}>Vehicle Model</Text>
-                  <Text style={{ color: "#fff" }}>
-                    {car?.model}
-                  </Text>
+                  <Text style={{ color: "#fff" }}>{car?.model}</Text>
                 </View>
               </View>
             </View>
@@ -204,7 +199,7 @@ export default function Details({ route }: any) {
             alignItems: "center",
             backgroundColor: "#111122",
             marginTop: open ? 20 : -75,
-            paddingTop: 20
+            paddingTop: 20,
           }}
         >
           <View
@@ -233,37 +228,41 @@ export default function Details({ route }: any) {
               setOpen(open ? false : true)
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 25 }}>Choose your plan</Text>
+            <Text style={{ color: "#fff", fontSize: 25 }}>
+              Choose your plan
+            </Text>
           </View>
 
-          {isLoaded ? <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
-            <FlatList
-              data={paymentMethods}
-              renderItem={({ item }) => (
-                <PaymentType item={{ payment_methods: item, car }} />
-              )}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              pagingEnabled
-              bounces={false}
-              keyExtractor={(item) => item.id.toString()}
-              onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                { useNativeDriver: false }
-              )}
-              viewabilityConfig={viewConfig}
-              scrollEventThrottle={16}
-              ItemSeparatorComponent={() => <View style={{ width: 45 }} />}
-              ref={slidesRef2}
-              snapToAlignment="center"
-              snapToOffsets={paymentMethods.map(
-                (_, index) => index * (width / 3.5 + 45)
-              )}
-              contentContainerStyle={{
-                paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2,
-              }}
-            />
-          </View> : null}
+          {isLoaded ? (
+            <View style={[styles.paymentList, { opacity: open ? 1 : 0.15 }]}>
+              <FlatList
+                data={paymentMethods}
+                renderItem={({ item }) => (
+                  <PaymentType item={{ payment_methods: item, car }} />
+                )}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                pagingEnabled
+                bounces={false}
+                keyExtractor={(item) => item.id.toString()}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                  { useNativeDriver: false }
+                )}
+                viewabilityConfig={viewConfig}
+                scrollEventThrottle={16}
+                ItemSeparatorComponent={() => <View style={{ width: 45 }} />}
+                ref={slidesRef2}
+                snapToAlignment="center"
+                snapToOffsets={paymentMethods.map(
+                  (_, index) => index * (width / 3.5 + 45)
+                )}
+                contentContainerStyle={{
+                  paddingHorizontal: width / 1.75 - (width / 3.5 + 45) / 2,
+                }}
+              />
+            </View>
+          ) : null}
 
           <View
             style={{
@@ -297,7 +296,16 @@ export default function Details({ route }: any) {
                   return
                 }
                 car.available = false
-                updateCar(id, car)
+                updateCar(id, car).then(() => {
+                  Alert.alert("Car successfully rented!", "", [
+                    {
+                      text: "OK",
+                      onPress(value) {
+                        navigation.navigate("CarList")
+                      },
+                    },
+                  ])
+                })
               }}
               style={{
                 width: 286,
@@ -309,7 +317,9 @@ export default function Details({ route }: any) {
                 alignItems: "center",
               }}
             >
-              <Text style={{ color: "#FFFFFF", fontSize: 14 }}>Rent car now</Text>
+              <Text style={{ color: "#FFFFFF", fontSize: 14 }}>
+                Rent car now
+              </Text>
               <View
                 style={{
                   flexDirection: "row",
@@ -319,8 +329,7 @@ export default function Details({ route }: any) {
                 }}
               >
                 <Text style={{ color: "#FFFFFF", fontSize: 14 }}>
-                  {car?.price_per_day} $ /
-                  hour
+                  {car?.price_per_day} $ / hour
                 </Text>
 
                 <ImageBackground
@@ -336,7 +345,6 @@ export default function Details({ route }: any) {
         <NavbarBot />
       </>
     </View>
-
   )
 }
 
