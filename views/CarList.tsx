@@ -69,6 +69,7 @@ const CarListView = () => {
 }
 
 export default function CarList() {
+  const navigation = useNavigation()
   return (
     <View style={{ ...clStyles.container }}>
       <ImageBackground
@@ -90,12 +91,17 @@ export default function CarList() {
           rental expert
         </Text>
       </View>
-      <Pressable style={clStyles.searchButton}>
+      <Pressable
+        style={clStyles.searchButton}
+        onPress={() => {
+          navigation.navigate("Search")
+        }}
+      >
         <Image
           style={styles.buttonIcon}
           source={require("../assets/search.png")}
         ></Image>
-        <Text style={styles.buttonLabel}>Search for cars</Text>
+        <Text style={styles.buttonLabel}>Search</Text>
       </Pressable>
 
       <CarListView />
