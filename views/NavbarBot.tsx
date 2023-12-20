@@ -6,10 +6,6 @@ export default function NavbarBot() {
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <ImageBackground
-          source={require("../assets/magnifer.png")}
-          style={styles.iconMagnifer}
-        ></ImageBackground>
-        <ImageBackground
           source={require("../assets/add-circle.png")}
           style={styles.iconCircle}
         ></ImageBackground>
@@ -27,7 +23,7 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 0,
+    bottom: 25,
     left: 0,
     right: 0,
     width: "100%",
@@ -36,11 +32,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleContainer: {
-    width: 200,
+    width: 150,
     height: 40,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     backgroundColor: "#151515",
     borderRadius: 20,
     paddingHorizontal: 20,
