@@ -24,7 +24,7 @@ export default function Search() {
         source={require("../assets/login-bg.png")}
         style={styles.background}
       ></ImageBackground>
-      <Text style={{ ...styles.descLabel, marginBottom: 25 }}>
+      <Text style={{ ...styles.cardTitle, marginBottom: 25 }}>
         Filter Car Types
       </Text>
       <ScrollView

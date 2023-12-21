@@ -34,6 +34,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
+  cardText: {
+    fontSize: 20,
+    color: "#fff",
+  },
+  cardTitle: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+  },
   appleButton: {
     width: 300,
     height: 40,

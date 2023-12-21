@@ -26,14 +26,10 @@ export default function SearchResults({ route }: any) {
     })
   })
 
-  const listings = carList.map((car: Car, index) => {
-    return
-  })
-
   return (
     <View style={{ ...styles.container, width: "100%" }}>
       <NavbarTop />
-      <Text style={styles.descLabel}>{category}s</Text>
+      <Text style={styles.cardTitle}>{category}s</Text>
       <ImageBackground
         source={require("../assets/login-bg.png")}
         style={styles.background}
