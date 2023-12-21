@@ -10,12 +10,15 @@ import {
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
+type CarListItemProps = {
+  index: number
+  car: Car
+}
 export default function CarItem({ item }: any) {
-
-  const { width } = useWindowDimensions();
+  const { width } = useWindowDimensions()
 
   return (
-    <View style={[styles.carContainer, {width}]}>
+    <View style={[styles.carContainer, { width }]}>
       <ImageBackground
         source={item.image}
         style={styles.carImage}
@@ -33,6 +36,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 350,
     height: 180,
-    transform: [{ scale: 1 }]
+    transform: [{ scale: 1 }],
   },
 })

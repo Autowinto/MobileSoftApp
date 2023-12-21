@@ -7,13 +7,12 @@ import {
   useWindowDimensions,
   Animated,
   ImageBackground,
-  ScrollView,
+  Image,
   Alert,
 } from "react-native"
 import Dots from "./Dots"
 import React, { useEffect, useRef, useState } from "react"
 import CarItem from "./items/CarItem"
-import { Image } from "react-native"
 import NavbarBot from "./NavbarBot"
 import paymentMethods from "../paymentMethods"
 import PaymentType from "./items/PaymentType"

@@ -1,7 +1,9 @@
+import { useNavigation } from "@react-navigation/native"
 import React from "react"
-import { ImageBackground, View } from "react-native"
+import { ImageBackground, Pressable, View } from "react-native"
 
 export default function NavbarBot() {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -9,10 +11,16 @@ export default function NavbarBot() {
           source={require("../assets/add-circle.png")}
           style={styles.iconCircle}
         ></ImageBackground>
-        <ImageBackground
-          source={require("../assets/user.png")}
-          style={styles.iconUser}
-        ></ImageBackground>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("UserProfile" as never)
+          }}
+        >
+          <ImageBackground
+            source={require("../assets/user.png")}
+            style={styles.iconUser}
+          ></ImageBackground>
+        </Pressable>
       </View>
     </View>
   )
